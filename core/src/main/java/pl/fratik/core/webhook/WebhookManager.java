@@ -21,15 +21,20 @@ import club.minnced.discord.webhook.WebhookClient;
 import club.minnced.discord.webhook.WebhookClientBuilder;
 import club.minnced.discord.webhook.exception.HttpException;
 import club.minnced.discord.webhook.receive.ReadonlyMessage;
+import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookMessage;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.SelfUser;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.Webhook;
 import net.dv8tion.jda.api.exceptions.PermissionException;
+import org.jetbrains.annotations.Nullable;
+import pl.fratik.core.command.CommandContext;
 import pl.fratik.core.entity.GuildConfig;
 import pl.fratik.core.entity.GuildDao;
 
@@ -74,6 +79,15 @@ public class WebhookManager {
             }
             throw new RuntimeException(e);
         }
+    }
+
+    public ReadonlyMessage send(WebhookEmbed eb, TextChannel channel, Member executor) {
+        send(new WebhookMessageBuilder()
+                        .setAvatarUrl(executor.getUser().getEffectiveAvatarUrl())
+                        .setUsername(executor.getEffectiveName())
+                        .addEmbeds(eb).build(),
+                channel);
+        return null;
     }
 
     public GuildConfig.Webhook getWebhook(TextChannel channel) {

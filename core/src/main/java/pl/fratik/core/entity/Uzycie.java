@@ -32,9 +32,7 @@ public class Uzycie {
     private final LinkedHashMap<String, ParsedArgument> arguments = new LinkedHashMap<>();
     private static final String NIZNAR = "Nie znaleziono argumentu ";
 
-    public Uzycie() {
-        // po prostu ignoruj i chuj
-    }
+    private Uzycie() { }
 
     public Uzycie(String key, String value) {
         this(key, value, false);

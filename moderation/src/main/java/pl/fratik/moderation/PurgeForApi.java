@@ -58,7 +58,7 @@ class PurgeForApi {
             if (purge.getPrivacy() == PurgePrivacy.PERMLEVEL) {
                 String requester = Exchange.headers().getHeader(ex, "Requester-ID").orElse(null);
                 if (requester == null) {
-                    Exchange.body().sendErrorCode(ex, Exceptions.Codes.PURGE_NO_REQUESTER_ID);
+                    Exchange.body().sendErrorCode(ex, Exceptions.Codes.NO_REQUESTER_ID);
                     return;
                 }
                 Member member;
@@ -108,7 +108,7 @@ class PurgeForApi {
             }
             String requester = Exchange.headers().getHeader(ex, "Requester-ID").orElse(null);
             if (requester == null) {
-                Exchange.body().sendErrorCode(ex, Exceptions.Codes.PURGE_NO_REQUESTER_ID);
+                Exchange.body().sendErrorCode(ex, Exceptions.Codes.NO_REQUESTER_ID);
                 return;
             }
             Member member;
@@ -178,7 +178,7 @@ class PurgeForApi {
             }
             String requester = Exchange.headers().getHeader(ex, "Requester-ID").orElse(null);
             if (requester == null) {
-                Exchange.body().sendErrorCode(ex, Exceptions.Codes.PURGE_NO_REQUESTER_ID);
+                Exchange.body().sendErrorCode(ex, Exceptions.Codes.NO_REQUESTER_ID);
                 return;
             }
             Member member;

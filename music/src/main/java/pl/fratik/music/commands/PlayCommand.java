@@ -148,8 +148,7 @@ public class PlayCommand extends MusicCommand {
             }
             if (identifiers.isEmpty()) identifiers.add(url);
         } else identifiers.add("scsearch:" + url);
-        boolean wasConnected = mms.isConnected();
-        if (!wasConnected) {
+        if (!mms.isConnected()) {
             if (!context.getChannel().canTalk()) context.sendMessage(context.getTranslated("play.no.perms.warning"));
             mms.setAnnounceChannel(context.getChannel());
             mms.connect(kanal);
@@ -161,9 +160,8 @@ public class PlayCommand extends MusicCommand {
             if (!temp.isEmpty()) audioTrackList.add(temp.get(0));
         }
         if (audioTrackList.isEmpty()) {
-            if (url.contains("youtube.com")) context.sendMessage(context.getTranslated("play.not.found.yt"));
-            else context.sendMessage(context.getTranslated("play.not.found"));
-            if (!wasConnected) mms.disconnect();
+            context.sendMessage(context.getTranslated("play.not.found"));
+            mms.disconnect();
             return;
         }
         if (audioTrackList.size() == 1) {

@@ -132,7 +132,7 @@ public class Module implements Modul {
         commands.add(new ZglosPrivCommand(privDao, eventWaiter, eventBus, shardManager, tlumaczenia));
         commands.add(new IgnoreCommand(userDao));
         commands.add(new BlacklistPrivCommand(userDao));
-        commands.add(new AchievementCommand());
+        commands.add(new AchievementCommand(tlumaczenia));
         commands.add(new EmojifyCommand());
         commands.add(new SprawdzuprawnieniaCommand());
         commands.add(new UstawPowitanieCommand(guildDao));
@@ -147,7 +147,7 @@ public class Module implements Modul {
         commands.add(new EmojiInfoCommand());
         if (Ustawienia.instance.apiKeys.get("osu") != null)
             commands.add(new OsuCommand(shardManager, eventWaiter, eventBus));
-        commands.add(new Rule34Command(eventWaiter, eventBus));
+//        commands.add(new Rule34Command(eventWaiter, eventBus));
         commands.add(new CoronastatsCommand(eventWaiter, eventBus));
 //        commands.add(new UstawPoziomCommand(guildDao, managerKomend));
 //        commands.add(new PoziomyUprawnienCommand());

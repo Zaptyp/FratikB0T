@@ -73,14 +73,13 @@ public class UserConfig implements DatabaseEntity {
     private String timezone = "default";
     private Boolean cytujFbot = false;
     private Boolean ytWarningSeen = false;
-    private Boolean ytSecondWarningSeen = false;
 
     public boolean isCytujFbot() {
         return cytujFbot != null && cytujFbot;
     }
 
-    public boolean isYtSecondWarningSeen() {
-        return ytSecondWarningSeen != null && ytSecondWarningSeen;
+    public boolean isYtWarningSeen() {
+        return ytWarningSeen != null && ytWarningSeen;
     }
 
     @Override

@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import pl.fratik.core.tlumaczenia.Language;
+import pl.fratik.music.managers.SearchManager;
 
 import java.util.Objects;
 
@@ -48,6 +49,12 @@ public class PiosenkaImpl implements Piosenka {
         this.requesterLanguage = language;
         this.thumbnailURL = thumbnailUrl;
         youtube = track instanceof YoutubeAudioTrack;
+    }
+
+    @Override
+    public void fillThumbnailURL(SearchManager searchManager) {
+        if (thumbnailURL != null || !youtube) return;
+        thumbnailURL = searchManager.getThumbnail(searchManager.extractIdFromUri(audioTrack.getInfo().uri)).getThumbnailURL();
     }
 
     @SuppressWarnings("all")

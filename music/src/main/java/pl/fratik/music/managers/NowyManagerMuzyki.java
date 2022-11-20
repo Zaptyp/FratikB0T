@@ -54,7 +54,6 @@ import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -155,7 +154,7 @@ public class NowyManagerMuzyki {
         Ustawienia.Lavalink.LavalinkNode nod = Ustawienia.instance.lavalink.nodes.get(0);
         JSONObject td = null;
         try (Response resp = NetworkUtil.downloadResponse("http://" + nod.address + ":" + nod.restPort +
-                "/loadtracks?identifier=" + URLEncoder.encode(url, StandardCharsets.UTF_8), nod.password)) {
+                "/loadtracks?identifier=" + URLEncoder.encode(url, "UTF-8"), nod.password)) {
             ResponseBody body = resp.body();
             if (body == null) throw new NullPointerException("body() null");
             td = new JSONObject(body.string());

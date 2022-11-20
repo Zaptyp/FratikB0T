@@ -18,6 +18,7 @@
 package pl.fratik.music.commands;
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import lombok.Setter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 import pl.fratik.core.command.NewCommandContext;
@@ -25,11 +26,13 @@ import pl.fratik.core.util.TimeUtil;
 import pl.fratik.music.entity.Piosenka;
 import pl.fratik.music.managers.ManagerMuzykiSerwera;
 import pl.fratik.music.managers.NowyManagerMuzyki;
+import pl.fratik.music.managers.SearchManager;
 
 import java.awt.*;
 
 public class NowplayingCommand extends MusicCommand {
     private final NowyManagerMuzyki managerMuzyki;
+    @Setter private static SearchManager searchManager;
 
     public NowplayingCommand(NowyManagerMuzyki managerMuzyki) {
         this.managerMuzyki = managerMuzyki;
@@ -50,6 +53,7 @@ public class NowplayingCommand extends MusicCommand {
         EmbedBuilder eb = new EmbedBuilder();
         eb.setAuthor(context.getTranslated("nowplaying.embed.header"), info.uri);
         eb.setTitle(info.title, piosenka.getAudioTrack().getInfo().uri);
+        piosenka.fillThumbnailURL(searchManager);
         eb.setImage(piosenka.getThumbnailURL());
         eb.addField(context.getTranslated("nowplaying.embed.added.by"), piosenka.getRequester(), true);
         eb.addField(context.getTranslated("nowplaying.embed.length"), info.isStream ?
